@@ -1055,6 +1055,7 @@
       <nav class="nav-left">
         <a href="index.html" class="nav-btn active">Главная</a>
         <a href="Portfolio.html" class="nav-btn">Портфолио</a>
+        <a href="#" class="nav-btn">Контакты</a>
       </nav>
       
       <a class="logo_text" href="index.html">
@@ -1067,6 +1068,15 @@
       </div>
     </div>
   </header>
+  
+  <!-- Мобильное меню -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="close-btn" id="closeMenu">&times;</span>
+    <a href="index.html" class="mobile-nav-btn">Главная</a>
+    <a href="Portfolio.html" class="mobile-nav-btn">Портфолио</a>
+    <a href="tel:+79135701460" class="mobile-nav-btn">+7 913 570 14 60</a>
+    <span class="city">г. Санкт-Петербург</span>
+  </div>
   
   <!-- Мобильное меню -->
   <div class="mobile-menu" id="mobileMenu">
@@ -1388,6 +1398,63 @@
     </div>
   </div>
 </footer>
+
+<script>
+    // Бургер меню - исправленный код
+    document.addEventListener('DOMContentLoaded', function() {
+      const burgerMenu = document.getElementById('burgerMenu');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const closeMenu = document.getElementById('closeMenu');
+      
+      // Функция для открытия/закрытия меню
+      function toggleMenu() {
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+      }
+      
+      // Обработчики событий
+      burgerMenu.addEventListener('click', toggleMenu);
+      closeMenu.addEventListener('click', toggleMenu);
+      
+      // Закрытие меню при клике на ссылку
+      const mobileLinks = document.querySelectorAll('.mobile-nav-btn');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', toggleMenu);
+      });
+      
+      // Закрытие меню при клике вне его области
+      document.addEventListener('click', function(event) {
+        if (!mobileMenu.contains(event.target) && 
+            !burgerMenu.contains(event.target) && 
+            mobileMenu.classList.contains('active')) {
+          toggleMenu();
+        }
+      });
+    });
+
+    // Остальные скрипты (FAQ, скролл и т.д.)
+    document.addEventListener('DOMContentLoaded', () => {
+      // FAQ раскрытие
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+          const item = q.parentElement;
+          item.classList.toggle('active');
+        });
+      });
+
+      // Плавный скролл вверх
+      const contactLink = document.querySelector('.contact-link');
+      if (contactLink) {
+        contactLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+    });
+  </script>
 
 <script>
   // Обработчик для плавного скролла вверх
