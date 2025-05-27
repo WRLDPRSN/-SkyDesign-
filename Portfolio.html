@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyDesign - Портфолио</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kufam&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Общие стили */
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background-color: #fff;
+      overflow-x: hidden;
+    }
+    
+    /* Шапка */
+    .header {
+      height: 80px;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: flex;
+      align-items: center;
+      max-width: 1600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin: 0 15px;
+      padding: 0 0px;
+    }
+
+    /* Левая навигация */
+    .nav-left {
+      display: flex;
+      gap: 12px;
+    }
+
+    /* Правая часть (номер телефона) */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Кнопки навигации */
+    .nav-btn {
+      padding: 10px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: black;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .nav-btn:hover {
+      background-color: #333;
+      color: white;
+    }
+
+    /* Логотип по центру */
+    .logo {
+      font-size: 36px;
+      font-weight: bold;
+      font-family: 'Kufam', sans-serif;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .logo_text {
+      text-decoration: none;
+      color: black;
+    }
+
+    /* Стиль для города и телефона */
+    .city, .phone {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      color: #555;
+      text-decoration: none;
+    }
+
+    /* Телефон - убрали ховер эффект */
+    .phone {
+      padding: 0;
+      border-radius: 0;
+    }
+
+    /* Контейнер для контента */
+    .content-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 40px;
+      border-radius: 8px;
+    }
+    
+    /* Секции проектов */
+    .project-section {
+      margin: 25px 0;
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+    }
+    
+    .project-image-container {
+      width: 100%;
+      max-width: 1600px;
+      height: 800px;
+      margin: 60px auto;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    .project-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .project-info {
+      display: flex;
+      gap: 60px;
+      margin: 40px 0;
+    }
+    
+    .project-title {
+      flex: 1;
+      font-size: 36px;
+      font-weight: 600;
+      margin: 0;
+      color: #222;
+    }
+    
+    .project-description {
+      flex: 1;
+      font-size: 18px;
+      color: #555;
+      margin: 0;
+      line-height: 1.8;
+    }
+    
+    /* Подвал*/
+    .site-footer {
+      background-color: #f8f8f8;
+      padding: 40px 20px;
+      font-family: 'Manrope', sans-serif;
+      color: #555;
+    }
+
+    .site-footer-wrapper {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 16px;
+    }
+
+    /* Текст слева — по левому краю */
+    .footer-left {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    /* Лого по центру */
+    .footer-center {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Текст справа — по правому краю */
+    .footer-right {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .footer-logo {
+      font-size: 36px;
+      font-family: 'Kufam', sans-serif;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .footer-contact {
+      color: #555;
+      text-decoration: none;
+      transition: color 0.3s;
+      font-size: 16px;
+    }
+
+    .footer-contact:hover {
+      color: #395F80;
+    }
+
+    .footer-city {
+      font-weight: 300;
+      color: #777;
+    }
+    
+    /* Бургер меню */
+    .burger-menu {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+      z-index: 100;
+    }
+    
+    .burger-line {
+      width: 100%;
+      height: 3px;
+      background-color: #333;
+      transition: all 0.3s;
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px 20px;
+      box-sizing: border-box;
+    }
+    
+    .mobile-menu.active {
+      display: flex;
+    }
+    
+    .mobile-nav-btn {
+      padding: 15px;
+      font-size: 20px;
+      text-decoration: none;
+      color: #333;
+      margin: 10px 0;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 1200px) {
+      .project-image-container {
+        height: 500px;
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .project-info {
+        flex-direction: column;
+        gap: 30px;
+      }
+      
+      .project-title, .project-description {
+        flex: auto;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0 20px;
+      }
+      
+      .nav-left, .nav-right {
+        display: none;
+      }
+      
+      .burger-menu {
+        display: flex;
+      }
+      
+      .content-container {
+        padding: 0 20px;
+      }
+      
+      .project-section {
+        margin: 60px 0;
+      }
+      
+      .project-image-container {
+        height: 400px;
+        margin: 40px 0;
+      }
+      
+      .project-title {
+        font-size: 28px;
+      }
+      
+      .project-description {
+        font-size: 16px;
+      }
+      
+      .site-footer-wrapper {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+      }
+      
+      .footer-left, .footer-right {
+        align-items: center;
+        text-align: center;
+      }
+      
+      .footer-logo {
+        font-size: 28px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .project-image-container {
+        height: 300px;
+      }
+      
+      .project-title {
+        font-size: 24px;
+      }
+      
+      .logo {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Шапка -->
+  <header class="header">
+    <div class="header-container">
+      <div class="burger-menu" id="burgerMenu">
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+      </div>
+      
+      <nav class="nav-left">
+        <a href="index.html" class="nav-btn">Главная</a>
+        <a href="Portfolio.html" class="nav-btn active">Портфолио</a>
+      </nav>
+      
+      <a class="logo_text" href="index.html">
+        <div class="logo">SkyDesign</div>
+      </a>
+      
+      <div class="nav-right">
+        <a href="tel:+79135701460" class="phone">+7 913 570 14 60</a>
+        <span class="city">г. Санкт-Петербург</span>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Мобильное меню -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="close-btn" id="closeMenu">&times;</span>
+    <a href="index.html" class="mobile-nav-btn">Главная</a>
+    <a href="Portfolio.html" class="mobile-nav-btn active">Портфолио</a>
+    <a href="#" class="mobile-nav-btn">Контакты</a>
+    <a href="tel:+79135701460" class="mobile-nav-btn">+7 913 570 14 60</a>
+    <span class="city">г. Санкт-Петербург</span>
+  </div>
+
+  <!-- Основной контент -->
+  <main class="portfolio-main">
+    <div class="content-container">
+      <!-- Проект 1 -->
+      <section class="project-section">
+        <div class="project-image-container">
+          <img src="images/Проект 1.jpg" alt="Дизайн-проект квартиры 90 м2" class="project-image">
+        </div>
+        <div class="project-info">
+          <h2 class="project-title">Дизайн-проект квартиры 90 м²</h2>
+          <p class="project-description">
+            Современный стиль с элементами скандинавского дизайна. Проект включает полный комплект чертежей, 
+            3D-визуализацию и авторский надзор. Особое внимание уделено эргономике пространства и системе хранения.
+          </p>
+        </div>
+      </section>
+      
+      <!-- Проект 2 -->
+      <section class="project-section">
+        <div class="project-image-container">
+          <img src="images/Проект 2.jpg" alt="Дизайн-проект квартиры 75 м2" class="project-image">
+        </div>
+        <div class="project-info">
+          <h2 class="project-title">Дизайн-проект квартиры 75 м²</h2>
+          <p class="project-description">
+            Минималистичный интерьер с продуманной системой хранения. Использованы натуральные материалы 
+            и спокойная цветовая гамма. Проект реализован за 3 месяца.
+          </p>
+        </div>
+      </section>
+      
+      <!-- Проект 3 -->
+      <section class="project-section">
+        <div class="project-image-container">
+          <img src="images/Проект 3.jpg" alt="Дизайн-проект квартиры 140 м2" class="project-image">
+        </div>
+        <div class="project-info">
+          <h2 class="project-title">Дизайн-проект квартиры 140 м²</h2>
+          <p class="project-description">
+            Классический стиль с современными элементами для семьи с детьми. Пространство организовано 
+            с учетом потребностей каждого члена семьи. Особое внимание уделено зонированию и освещению.
+          </p>
+        </div>
+      </section>
+      
+      <!-- Проект 4 -->
+      <section class="project-section">
+        <div class="project-image-container">
+          <img src="images/Проект 4.jpg" alt="Дизайн-проект индивидуального жилого дома" class="project-image">
+        </div>
+        <div class="project-info">
+          <h2 class="project-title">Дизайн-проект индивидуального жилого дома</h2>
+          <p class="project-description">
+            Загородный дом в современном стиле с панорамным остеклением. Проект включает ландшафтный дизайн 
+            и оформление прилегающей территории. Использованы экологичные материалы.
+          </p>
+        </div>
+      </section>
+      
+      <!-- Проект 5 -->
+      <section class="project-section">
+        <div class="project-image-container">
+          <img src="images/Проект 5.jpg" alt="Декорирование номеров отеля King" class="project-image">
+        </div>
+        <div class="project-info">
+          <h2 class="project-title">Декорирование номеров отеля "King"</h2>
+          <p class="project-description">
+            Элегантный дизайн с элементами ар-деко для премиального отеля. Разработана концепция 15 номеров 
+            разных категорий. Особое внимание уделено деталям и качеству отделочных материалов.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Подвал -->
+  <footer class="site-footer">
+    <div class="site-footer-wrapper">
+      <div class="footer-col footer-left">
+        <span>2025 © SkyDesign. Все права защищены</span>
+      </div>
+      <div class="footer-col footer-center">
+        <span class="footer-logo">SkyDesign</span>
+      </div>
+      <div class="footer-col footer-right">
+        <a href="tel:+79135701460" class="footer-contact">+7 913 570 14 60</a>
+        <a href="https://t.me/skydesign" class="footer-contact" target="_blank">Telegram</a>
+        <a href="https://wa.me/79135701460" class="footer-contact" target="_blank">WhatsApp</a>
+        <a href="mailto:info@skydesign.ru" class="footer-contact">info@skydesign.ru</a>
+        <span class="footer-city">г. Санкт-Петербург</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Бургер меню
+    const burgerMenu = document.getElementById('burgerMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    
+    burgerMenu.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    // Закрытие меню при клике на ссылку
+    const mobileLinks = document.querySelectorAll('.mobile-nav-btn');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+</body>
+</html>
