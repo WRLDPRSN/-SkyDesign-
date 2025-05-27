@@ -1074,6 +1074,7 @@
     <span class="close-btn" id="closeMenu">&times;</span>
     <a href="index.html" class="mobile-nav-btn">Главная</a>
     <a href="Portfolio.html" class="mobile-nav-btn">Портфолио</a>
+
     <a href="tel:+79135701460" class="mobile-nav-btn">+7 913 570 14 60</a>
     <span class="city">г. Санкт-Петербург</span>
   </div>
@@ -1399,53 +1400,59 @@
   </div>
 </footer>
 
+
 <script>
-    // Бургер меню - исправленный код
-    document.addEventListener('DOMContentLoaded', function() {
-      const burgerMenu = document.getElementById('burgerMenu');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const closeMenu = document.getElementById('closeMenu');
-      
-      // Функция для открытия/закрытия меню
-      function toggleMenu() {
-        mobileMenu.classList.toggle('active');
-        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-      }
-      
-      // Обработчики событий
+  document.addEventListener('DOMContentLoaded', function() {
+    // ===== Бургер-меню =====
+    const burgerMenu = document.getElementById('burgerMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    
+    function toggleMenu() {
+      mobileMenu.classList.toggle('active');
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+    }
+    
+    if (burgerMenu && mobileMenu && closeMenu) {
       burgerMenu.addEventListener('click', toggleMenu);
       closeMenu.addEventListener('click', toggleMenu);
       
-      // Закрытие меню при клике на ссылку
-      const mobileLinks = document.querySelectorAll('.mobile-nav-btn');
-      mobileLinks.forEach(link => {
+      // Закрытие при клике на ссылки
+      document.querySelectorAll('.mobile-nav-btn').forEach(link => {
         link.addEventListener('click', toggleMenu);
       });
       
-      // Закрытие меню при клике вне его области
-      document.addEventListener('click', function(event) {
+      // Закрытие при клике вне меню
+      document.addEventListener('click', (event) => {
         if (!mobileMenu.contains(event.target) && 
             !burgerMenu.contains(event.target) && 
             mobileMenu.classList.contains('active')) {
           toggleMenu();
         }
       });
+    }
+
+    // ===== FAQ аккордеон =====
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        item.classList.toggle('active');
+        
+        // Закрытие других открытых элементов
+        if (item.classList.contains('active')) {
+          document.querySelectorAll('.faq-item').forEach(otherItem => {
+            if (otherItem !== item && otherItem.classList.contains('active')) {
+              otherItem.classList.remove('active');
+            }
+          });
+        }
+      });
     });
 
-    // Остальные скрипты (FAQ, скролл и т.д.)
-    document.addEventListener('DOMContentLoaded', () => {
-      // FAQ раскрытие
-      document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', () => {
-          const item = q.parentElement;
-          item.classList.toggle('active');
-        });
-      });
-
-      // Плавный скролл вверх
-      const contactLink = document.querySelector('.contact-link');
-      if (contactLink) {
-        contactLink.addEventListener('click', function(e) {
+    // ===== Плавный скролл =====
+    function smoothScroll(target) {
+      if (target) {
+        target.addEventListener('click', (e) => {
           e.preventDefault();
           window.scrollTo({
             top: 0,
@@ -1453,51 +1460,29 @@
           });
         });
       }
-    });
-  </script>
-
-<script>
-  // Обработчик для плавного скролла вверх
-  function scrollToTopSmooth() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Вешаем событие на кнопки
-  document.querySelectorAll('.service-button, .service-link').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      scrollToTopSmooth();
-    });
-  });
-</script>
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // FAQ раскрытие
-    document.querySelectorAll('.faq-question').forEach(q => {
-      q.addEventListener('click', () => {
-        const item = q.parentElement;
-        item.classList.toggle('active');
-      });
-    });
-
-    // Плавный скролл вверх
-    const contactLink = document.querySelector('.contact-link');
-    if (contactLink) {
-      contactLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
     }
+    
+    // Обработчики для всех элементов
+    smoothScroll(document.querySelector('.contact-link'));
+    document.querySelectorAll('.service-button, .service-link').forEach(btn => {
+      smoothScroll(btn);
+    });
+
+    // ===== Дополнительные проверки =====
+    // Проверка существования элементов перед добавлением обработчиков
+    const elementsToCheck = [
+      '.faq-question',
+      '.contact-link',
+      '.service-button',
+      '.service-link'
+    ];
+    
+    elementsToCheck.forEach(selector => {
+      if (!document.querySelector(selector)) {
+        console.warn(`Элемент ${selector} не найден на странице`);
+      }
+    });
   });
 </script>
-</body>
-</html>
-
-
 </body>
 </html>
